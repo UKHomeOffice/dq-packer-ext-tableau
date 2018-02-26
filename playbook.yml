@@ -11,9 +11,10 @@
           - UpdateRollups
         state: installed
 
-    - name: Rename computer
+    - name: Firewall rules
       win_shell: |
-        Rename-Computer -NewName EXTERNAL-TABLEAU1
+        Set-NetFirewallProfile -Profile Domain -Enabled False
+        Set-NetFirewallRule -Group "@FirewallAPI.dll,-28502" -Direction Inbound -Profile Domain -Enabled True
 
     - name: Create tmp directory
       win_file:
