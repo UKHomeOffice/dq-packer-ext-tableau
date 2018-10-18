@@ -34,7 +34,7 @@
       "winrm_insecure": true,
       "user_data_file": "./scripts/setupwrm.ps1",
       "instance_type": "t2.medium",
-      "ami_name": "dq-ext-tableau- {{isotime | clean_ami_name}}",
+      "ami_name": "dq-ext-tableau-{{isotime | clean_ami_name}}",
       "ami_users": [
         "483846886818",
         "337779336338"
