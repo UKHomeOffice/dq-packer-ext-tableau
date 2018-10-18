@@ -1,19 +1,19 @@
 pipeline:
 
   validate:
-    image: ukhomeofficedigital/dq-packer-ansible
+    image: quay.io/ukhomeofficedigital/dq-packer-ansible
     commands:
       - export HOME=/home/packer
       - packer validate packer.json
 
   inspect:
-    image: ukhomeofficedigital/dq-packer-ansible
+    image: quay.io/ukhomeofficedigital/dq-packer-ansible
     commands:
       - export HOME=/home/packer
       - packer inspect packer.json
 
   build:
-    image: ukhomeofficedigital/dq-packer-ansible
+    image: quay.io/ukhomeofficedigital/dq-packer-ansible
     commands:
       - export HOME=/home/packer
       - packer build packer.json
