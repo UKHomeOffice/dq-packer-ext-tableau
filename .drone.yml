@@ -16,6 +16,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/dq-packer-ansible
     commands:
       - export HOME=/home/packer
+      - export DRONE_BUILD_NUMBER=$${DRONE_BUILD_NUMBER}
       - packer build packer.json
     secrets:
       - AWS_ACCESS_KEY_ID
