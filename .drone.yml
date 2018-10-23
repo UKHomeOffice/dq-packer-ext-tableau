@@ -54,5 +54,5 @@ pipeline:
       - PROD_ACC_ID
       - PROD_ACC_ID
     when:
-      event: deployment
+      event: push
       branch: master
