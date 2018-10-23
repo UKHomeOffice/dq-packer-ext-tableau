@@ -60,6 +60,11 @@
           "./scripts/sysprep-ec2config.ps1",
           "./scripts/sysprep-bundleconfig.ps1"
       ]
+    },
+    {
+      "type": "file",
+      "source": "./scripts/tableau-backup.ps1",
+      "destination": "C:\\Scripts"
     }
   ]
 }

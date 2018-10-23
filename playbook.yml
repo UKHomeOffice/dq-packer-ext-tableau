@@ -26,6 +26,11 @@
         path: C:\tabcmd
         state: directory
 
+    - name: Create Tableau backup directory
+      win_file:
+        path: C:\backups\Tableau
+        state: directory
+
     - name: Install Cholocatey
       win_shell: |
         iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -64,6 +69,26 @@
         aws s3 cp s3://dq-config-bucket/dq-tableau/gold-master/ C:\tmp\install\ --recursive
       args:
         executable: powershell.exe
+
+    - name: Install AWSPowerShell
+      win_shell:
+        Install-Module -Name AWSPowerShell
+      args:
+        executable: powershell.exe
+
+    - name: Create Windows Scheduled task to run Tableau backup
+      win_scheduled_task:
+        name: "Tableau S3 Backups"
+        description: "Run backups of Tableau and upload to S3"
+        actions:
+          - path: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+            arguements: -ExecutionPolicy Unrestricted -NonInteractive -File C:\Scripts\tableau-backup.ps1
+        triggers:
+          type: daily
+          start_boundary: 2018-01-01T19:00:00
+        username: SYSTEM
+        state: present
+        enabled: yes
 
     - name: Convert line endings from Linux to Windows (PowerShell)
       win_shell: '(Get-Content "C:\tmp\install\partitioning.txt") -replace "`n", "`r`n" | Set-Content "C:\tmp\install\volume_partitioning.txt"'
