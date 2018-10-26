@@ -71,7 +71,7 @@
         executable: powershell.exe
 
     - name: Install AWSPowerShell
-      win_shell:
+      win_shell: |
         Install-Module -Name AWSPowerShell
       args:
         executable: powershell.exe
