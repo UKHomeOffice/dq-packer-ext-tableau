@@ -86,6 +86,7 @@
         actions:
           - path: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
             arguements: -ExecutionPolicy Unrestricted -NonInteractive -File C:\Scripts\tableau-backup.ps1
+        executable: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
         triggers:
           type: daily
           start_boundary: '2018-01-01T19:00:00'
