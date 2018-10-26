@@ -71,7 +71,9 @@
         executable: powershell.exe
 
     - name: Install AWSPowerShell
-      win_shell: 'Install-Module -Name AWSPowerShell'
+      win_psmodule:
+        name: AWSPowerShell
+        state: present
 
     - name: Create Windows Scheduled task to run Tableau backup
       win_scheduled_task:
