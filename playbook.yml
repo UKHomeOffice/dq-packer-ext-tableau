@@ -71,8 +71,12 @@
         executable: powershell.exe
 
     - name: Install AWSPowerShell
-      win_psmodule:
-        name: AWSPowerShell
+      win_get_url:
+        url: https://sdk-for-net.amazonwebservices.com/latest/AWSToolsAndSDKForNet.msi
+        dest: C:\tmp\AWSToolsAndSDKForNet.msi
+    - win_msi:
+        path: C:\tmp\AWSToolsAndSDKForNet.msi
+        wait: yes
         state: present
 
     - name: Create Windows Scheduled task to run Tableau backup
