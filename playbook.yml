@@ -90,6 +90,7 @@
         triggers:
           type: daily
           start_boundary: '2018-01-01T19:00:00'
+        frequency: daily
         username: SYSTEM
         state: present
         enabled: yes
