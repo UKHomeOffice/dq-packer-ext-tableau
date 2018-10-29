@@ -85,7 +85,7 @@
         description: "Run backups of Tableau and upload to S3"
         executable: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Unrestricted -NonInteractive -File C:\Scripts\tableau-backup.ps1
         frequency: daily
-        time: 19:00
+        time: 7pm
         username: SYSTEM
         state: present
         enabled: yes
