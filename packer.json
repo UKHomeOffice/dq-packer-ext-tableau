@@ -64,7 +64,7 @@
     {
       "type": "file",
       "source": "./scripts/tableau-backup.ps1",
-      "destination": "C:\\Scripts"
+      "destination": "C:\\Scripts\\tableau-backup.ps1"
     }
   ]
 }
