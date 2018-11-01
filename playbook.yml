@@ -96,13 +96,13 @@
       win_shell: |
         Rename-Computer -NewName "TAB-EXT" -Restart
 
-    - name: Install Tableau Server
-      win_shell: |
-        c:\tmp\install\TableauServer-64bit-2018-GoldMaster.exe /VERYSILENT /ACCEPTEULA
-
     - name: Install Tableau cmd
       win_shell: |
         c:\tmp\install\TableauServerTabcmd-64bit-2018-GoldMaster.exe /VERYSILENT /NORESTART
+
+    - name: Install Tableau Server
+      win_shell: |
+        c:\tmp\install\TableauServer-64bit-2018-GoldMaster.exe /VERYSILENT /ACCEPTEULA
 
     - name: Unzip Cloudwatch config file
       win_unzip:
