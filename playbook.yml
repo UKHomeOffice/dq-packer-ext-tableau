@@ -92,6 +92,14 @@
     - name: Convert line endings from Linux to Windows (PowerShell)
       win_shell: '(Get-Content "C:\tmp\install\partitioning.txt") -replace "`n", "`r`n" | Set-Content "C:\tmp\install\volume_partitioning.txt"'
 
+    - name: Change hostname
+      win_hostname:
+        name: TAB-EXT
+
+    - name: Install Tableau Server
+      win_shell: |
+        c:\tmp\install\TableauServer-64bit-2018-GoldMaster.exe /VERYSILENT /ACCEPTEULA
+
     - name: Install Tableau cmd
       win_shell: |
         c:\tmp\install\TableauServerTabcmd-64bit-2018-GoldMaster.exe /VERYSILENT /NORESTART
