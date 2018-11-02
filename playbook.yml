@@ -89,20 +89,13 @@
         $task.Triggers.Repetition.Duration = "P1D"
         $task | Set-ScheduledTask
 
-    - name: Convert line endings from Linux to Windows (PowerShell)
-      win_shell: '(Get-Content "C:\tmp\install\partitioning.txt") -replace "`n", "`r`n" | Set-Content "C:\tmp\install\volume_partitioning.txt"'
-
-    - name: Change hostname
+    - name: Rename computer
       win_shell: |
-        Rename-Computer -NewName "TAB-EXT" -Restart
+        Rename-Computer -NewName TAB-EXT
 
     - name: Install Tableau cmd
       win_shell: |
         c:\tmp\install\TableauServerTabcmd-64bit-2018-GoldMaster.exe /VERYSILENT /NORESTART
-
-    - name: Install Tableau Server
-      win_shell: |
-        c:\tmp\install\TableauServer-64bit-2018-GoldMaster.exe /VERYSILENT /ACCEPTEULA
 
     - name: Unzip Cloudwatch config file
       win_unzip:
