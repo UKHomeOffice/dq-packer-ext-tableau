@@ -30,7 +30,6 @@ pipeline:
       - export filters="--owner 093401982388 --filters "Name=name,Values=dq-ext-tableau*""
       - export aws_id=$${NOTPROD_ACC_ID}
       - export aws_key=$${NOTPROD_ACC_KEY}
-      - export bucket_name=$${NOTPROD_BUCKET_NAME}      
       - export region=eu-west-2
       - export HOME=/home/packer
       - cd /home/packer

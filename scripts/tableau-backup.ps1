@@ -1,3 +1,5 @@
+Import-Module AWSPowerShell
+
 # Preferences
 $ErrorActionPreference = "Stop"
 $DebugPreference       = "Continue"
@@ -16,7 +18,7 @@ $tabadmin              = $bin_location + "\tabadmin.exe"
 # AWS S3 Bucket variables
 $Region                = "eu-west-2"
 $BucketName            = (get-item env:$bucket_name).Value
-$BucketSubFolder       = "tableau-backup"
+$BucketSubFolder       = (get-item env:$bucket_sub_path).Value
 
 # Backup retention
 $DaysToKeep      = "7"
@@ -106,7 +108,7 @@ function Copy-S3 {
   }
 }
 
-# Functino to remove local backups, depending on the backup retention (DaysToKeep)
+# Function to remove local backups, depending on the backup retention (DaysToKeep)
 function Remove_Local_Backups {
 	Write-Log "Zipping up Tableau Logs" -LogLevel Info
   try {
@@ -125,9 +127,9 @@ function Remove_Local_Backups {
 
 function Main {
 	Try-S3Bucket
-	Zip-logs
 	Tableau-Backup
-	Cleanup
 	Copy-S3
 	Remove_Local_Backups
 }
+
+main
