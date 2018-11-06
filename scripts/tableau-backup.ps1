@@ -17,8 +17,8 @@ $tabadmin              = $bin_location + "\tabadmin.exe"
 
 # AWS S3 Bucket variables
 $Region                = "eu-west-2"
-$BucketName            = (get-item env:$bucket_name).Value
-$BucketSubFolder       = (get-item env:$bucket_sub_path).Value
+$BucketName            = $env:bucket_name
+$BucketSubFolder       = $env:bucket_sub_path
 
 # Backup retention
 $DaysToKeep      = "7"
@@ -80,7 +80,7 @@ function Try-S3Bucket {
 function Tableau-Backup {
 	Write-Log "Starting Tableau backup..." -LogLevel Info
 	try {
-		$output = &"$tabadmin" backup -d -v $Backups_folder
+		$output = &"$tabadmin" backup -d -v $backups_folder
 		Invoke-Expression $output
 	}
 	catch {
