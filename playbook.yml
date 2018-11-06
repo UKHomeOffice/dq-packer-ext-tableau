@@ -79,16 +79,15 @@
         wait: yes
         state: present
 
-    - name: Create Windows Scheduled task to run Tableau backup
-      win_scheduled_task:
-        name: "Tableau S3 Backups"
-        description: "Run backups of Tableau and upload to S3"
-        executable: cd c:\backups\Tableau & C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Unrestricted -NonInteractive -File C:\Scripts\tableau-backup.ps1
-        frequency: daily
-        time: 7pm
-        username: SYSTEM
-        state: present
-        enabled: yes
+    - name: Setup scheduled task for Data-transfer
+      win_shell: |
+        $action = New-ScheduledTaskAction -Execute 'cd c:\backups\Tableau & C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Unrestricted -NonInteractive -File C:\Scripts\tableau-backup.ps1'
+        $trigger = New-ScheduledTaskTrigger -Daily -At 7pm
+        $description = "Backup Tableau daily and copy backups to S3"
+        $principal = New-ScheduledTaskPrincipal -UserID "NT AUTHORITY\SYSTEM" -LogonType ServiceAccount
+        $task = Register-ScheduledTask -TaskName "Tableau S3 Backups2" -Trigger $trigger -Action $action -Description $description -Principal $principal
+        $task.Triggers.Repetition.Duration = "P1D"
+        $task | Set-ScheduledTask
 
     - name: Convert line endings from Linux to Windows (PowerShell)
       win_shell: '(Get-Content "C:\tmp\install\partitioning.txt") -replace "`n", "`r`n" | Set-Content "C:\tmp\install\volume_partitioning.txt"'
