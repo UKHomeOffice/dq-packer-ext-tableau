@@ -109,7 +109,7 @@ function Copy-S3 {
 }
 
 # Function to remove local backups, depending on the backup retention (DaysToKeep)
-function Remove_Local_Backups {
+function Remove-Local-Backups {
 	Write-Log "Zipping up Tableau Logs" -LogLevel Info
   try {
 	  $oldfiles = Get-ChildItem $backups_folder -file | Where-object {$_.LastWriteTime -lt $date.AddDays(-$DaysToKeep)}
@@ -129,7 +129,7 @@ function Main {
 	Try-S3Bucket
 	Tableau-Backup
 	Copy-S3
-	Remove_Local_Backups
+	Remove-Local-Backups
 }
 
 main
